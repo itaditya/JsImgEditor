@@ -2,30 +2,48 @@
 <html >
   <head>
     <meta charset="UTF-8">
-    <title>A Pen by  Aditya</title>
-    
-    
-    
-    
-    
-    
-    
-    
+    <title>Js Based Image Editor</title>
   </head>
-
-  <body>
-
-    <img src="assets/1.png" height="401" width="600" id="image" style="display:none;">
-    <canvas id="crop-canvas" style="cursor:crosshair;">
-    	Your browser does not support the HTML5 canvas tag.
-    </canvas>
-    <button onclick="call_filter();">Apply</button>
-    <div id="pallete" style="width:200px;height:100px;"></div>
-    
-        <script src="js/index.js"></script>
-
-    
-    
-    
+  <style>
+    button {
+      height: 50px;
+      width: 150px;
+      margin: 17px auto;
+    }
+    #img {
+      height: 300px;
+      width: 420px;
+    }
+  </style>
+  <body>    
+        <span id="img-container">
+          <img src="assets/1.png" id="img">
+        </span>
+        <canvas id="canvas"></canvas>
+        <br>
+        <button id="invertbtn">Invert</button>
+        <button id="grayscalebtn">Grayscale</button>
+        <button id="brightenbtn" data-value="10">Brighten</button>
+        <button id="transparentbtn" data-value="30">Transparent</button>
+        <button id="darkenbtn" data-value="5">Darken</button>
+        <button id="solarisebtn" data-value="20">Solarise</button>
+        <button id="greenrybtn" data-value="10">Greenry</button>
+        <button id="nightlybtn" data-value="5">Nightly</button>
+        <div>
+          <button id="colorSwitchbtn">Switch Colors </button>
+           &nbsp;
+          <span>rgba(</span>
+          <input type="text" id="before" placeholder="Eg :- 255,122,0 ">
+          <span> ) &nbsp;to&nbsp; rgba(</span>
+          <input type="text" id="after" placeholder="Eg :- 0,0,0 "><span> )</span>
+        </div>        
+        <button id="restorebtn">Restore</button>
+        <br>
+        <input type="file" id="load_file">
+        &nbsp;
+        <a href="#" id="downloadbtn" download>Download</a>
+        <script src="js/filter.js"></script>
+        <script>
+        </script>    
   </body>
 </html>

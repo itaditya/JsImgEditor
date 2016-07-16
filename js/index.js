@@ -11,7 +11,7 @@ window.onload = function () {
 	console.log(imageManipulationCanvas);
 	console.log(myImageData);
 	console.log(myImageData.data.length);
-	console.log(toDataUrl(myImageData));
+	// console.log(toDataUrl(myImageData));
 	myImageData.data = print_data(myImageData.data);
 	console.log(myImageData.data[myImageData.data.length-1]);
 
@@ -34,13 +34,12 @@ function print_data(data) {
 function pick(event) {
 	var x = event.layerX;
 	var y = event.layerY;
-	// console.log(x,y);
 	var pixel = imageManipulationCtx.getImageData(x,y,1,1);
 	var data = pixel.data;
 	var rgba = 'rgba('+data[0]+','+data[1]+','+data[2]+','+data[3]+')';
 	var pallete = document.getElementById('pallete');
 	pallete.style.background = rgba;
+	pallete.style.color = '#fff';
 	pallete.textContent = rgba;
-
 }
 imageManipulationCanvas.addEventListener('mousemove',pick);

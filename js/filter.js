@@ -10,7 +10,6 @@ function draw(img) {
 	canvas.height = img.height;
 	canvas.width = img.width;
 
-	// canvas.style.pointer = "crosshair";
 	var ctx = canvas.getContext('2d');
 	ctx.drawImage(img,0,0);
 	// img.style.display = "none";
@@ -81,6 +80,20 @@ function draw(img) {
 		ctx.putImageData(imageData,0,0);
 	};
 
+	var darken = function() {
+
+		var value = parseInt(this.dataset.value);
+
+		for (var i = data.length - 1; i >= 0; i-=4) {
+
+
+			data[i-1] -= value;         //b
+			data[i-2] -= value;         //g
+			data[i-3] -= value;         //r
+
+		}
+		ctx.putImageData(imageData,0,0);
+	};
 	var solarise = function() {
 
 		var value = parseInt(this.dataset.value);
@@ -111,6 +124,26 @@ function draw(img) {
 		ctx.putImageData(imageData,0,0);
 	};
 
+	var colorSwitch = function() {
+
+		var beforeValue = document.querySelector('#before').value;
+		beforeValue = beforeValue.split(',');
+
+		var afterValue = document.querySelector('#after').value;
+		afterValue = afterValue.split(',');
+
+		console.log(data[0]/256,data[1]/256,data[2]/256);
+		for (var i = data.length - 1; i >= 0; i-=4) {
+			if(data[i-1] == beforeValue[2] && data[i-2] == beforeValue[1] && data[i-3] == beforeValue[0]) {
+				data[i-1] = afterValue[2];         //b
+				data[i-2] = afterValue[1];         //g
+				data[i-3] = afterValue[0];         //r
+			}
+
+		}
+		ctx.putImageData(imageData,0,0);
+	};
+
 	var restore = function() {          // working now
 
 		for (var i = data.length - 1; i >= 0; i--) {
@@ -132,6 +165,9 @@ function draw(img) {
 	var transparentbtn = document.getElementById('transparentbtn');
 	transparentbtn.addEventListener('click',transparency);
 
+	var darkenbtn = document.getElementById('darkenbtn');
+	darkenbtn.addEventListener('click',darken);
+
 	var solarisebtn = document.getElementById('solarisebtn');
 	solarisebtn.addEventListener('click',solarise);
 
@@ -141,6 +177,8 @@ function draw(img) {
 	var nightlybtn = document.getElementById('nightlybtn');
 	nightlybtn.addEventListener('click',nightly);
 
+	var colorSwitchbtn = document.getElementById('colorSwitchbtn');
+	colorSwitchbtn.addEventListener('click',colorSwitch);
 
 	var restorebtn = document.getElementById('restorebtn');
 	restorebtn.addEventListener('click',restore);
@@ -149,3 +187,36 @@ function draw(img) {
 	downloadbtn.setAttribute('href',url);
 }
 
+// File upload feature
+
+function handleFiles(files) {
+  for (var i = 0; i < files.length; i++) {
+    var file = files[i];
+    var imageType = /^image\//;
+    
+    if (!imageType.test(file.type)) {
+      continue;
+    }
+    
+    var img = document.createElement("img");
+    img.classList.add("obj");
+    img.setAttribute('id','img')
+    img.file = file;
+
+    document.querySelector('#img-container').removeChild(document.querySelector('#img')); 
+
+    document.querySelector('#img-container').appendChild(img); // Assuming that "preview" is the div output where the content will be displayed.
+
+    img.onload = function() {
+      draw(this);
+    };
+    
+    var reader = new FileReader();
+    reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(img);
+    reader.readAsDataURL(file);
+  }
+}
+
+document.querySelector('#load_file').addEventListener('change', function (e) {
+     handleFiles(this.files);
+}, false);
