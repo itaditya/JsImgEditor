@@ -11,8 +11,44 @@ function draw(img) {
 	canvas.width = img.width;
 
 	var ctx = canvas.getContext('2d');
-	ctx.drawImage(img,0,0);
+	// ctx.drawImage(img,0,0);
 	// img.style.display = "none";
+
+
+	var fitImage = function() {
+		var imageAspectRatio = img.width / img.height;
+		var canvasAspectRatio = canvas.width / canvas.height;
+		var renderableHeight, renderableWidth, xStart, yStart;
+
+		// If image's aspect ratio is less than canvas's we fit on height
+		// and place the image centrally along width
+		if(imageAspectRatio < canvasAspectRatio) {
+			renderableHeight = canvas.height;
+			renderableWidth = img.width * (renderableHeight / img.height);
+			xStart = (canvas.width - renderableWidth) / 2;
+			yStart = 0;
+		}
+
+		// If image's aspect ratio is greater than canvas's we fit on width
+		// and place the image centrally along height
+		else if(imageAspectRatio > canvasAspectRatio) {
+			renderableWidth = canvas.width
+			renderableHeight = img.height * (renderableWidth / img.width);
+			xStart = 0;
+			yStart = (canvas.height - renderableHeight) / 2;
+		}
+
+		// Happy path - keep aspect ratio
+		else {
+			renderableHeight = canvas.height;
+			renderableWidth = canvas.width;
+			xStart = 0;
+			yStart = 0;
+		}
+		ctx.drawImage(img, xStart, yStart, renderableWidth, renderableHeight);
+	};
+
+	fitImage()
 
 	var imageData = ctx.getImageData(0,0,canvas.width,canvas.height);
 	var data = imageData.data;
@@ -23,7 +59,6 @@ function draw(img) {
 	for (var i = data.length - 1; i >= 0; i--) {
 		copydata[i] = data[i];
 	};
-
 	var invert = function() {
 		for (var i = data.length - 1; i >= 0; i-=4) {
 			data[i-1] = 255 - data[i-1];         //b
@@ -132,9 +167,10 @@ function draw(img) {
 		var afterValue = document.querySelector('#after').value;
 		afterValue = afterValue.split(',');
 
-		console.log(data[0]/256,data[1]/256,data[2]/256);
+		console.log(data[0],data[1],data[2],data[3]);
 		for (var i = data.length - 1; i >= 0; i-=4) {
 			if(data[i-1] == beforeValue[2] && data[i-2] == beforeValue[1] && data[i-3] == beforeValue[0]) {
+				data[i] = afterValue[3]*255;         //a
 				data[i-1] = afterValue[2];         //b
 				data[i-2] = afterValue[1];         //g
 				data[i-3] = afterValue[0];         //r
