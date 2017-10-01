@@ -2,78 +2,86 @@
 <html>
     <head>
         <meta charset="UTF-8"/>
-        <title>
-            Js Based Image Editor
-        </title>
+        <title>Js Based Image Editor</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+        <link rel="stylesheet" href="./style.css">
     </head>
-    <style>
-      button {
-        height: 50px;
-        width: 150px;
-        margin: 17px auto;
-      }
-      #img {
-        height: 300px;
-        width: 420px;
-      }
-    </style>
-    <body>
-        <a href="#" id="downloadlink" download></a>
-        <img src="assets/1.png" id="img"/>
-        <canvas id="canvas"></canvas>
-        <br/>
-        <div class="editBtns">
-            <button id="invertbtn">
-                Invert
-            </button>
-            <button id="grayscalebtn">
-                Grayscale
-            </button>
-            <button id="brightenbtn" data-value="10">
-                Brighten
-            </button>
-            <button id="transparentbtn" data-value="30">
-                Transparent
-            </button>
-            <button id="darkenbtn" data-value="5">
-                Darken
-            </button>
-            <button id="solarisebtn" data-value="20">
-                Solarise
-            </button>
-            <button id="greenrybtn" data-value="10">
-                Greenry
-            </button>
-            <button id="nightlybtn" data-value="5">
-                Nightly
-            </button>
-            <div>
-                <button id="colorSwitchbtn">
-                    Switch Colors
-                </button>
-                &nbsp;
-                <span>
-                    rgba(
-                </span>
-                <input type="text" id="before" placeholder="Eg :- 255,122,0 "/>
-                <span>
-                    ) &nbsp;to&nbsp; rgba(
-                </span>
-                <input type="text" id="after" placeholder="Eg :- 0,0,0 "/>
-                <span>
-                    )
-                </span>
+    
+    <body class="editBtns">
+
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01"
+                aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                <a class="navbar-brand" href="#">Photo Editor</a>
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#"><input type="file" id="load_file" class="" /></span></a>
+                    </li>
+                    
+                </ul>
+                <a class="navbar-text" href="#" id="restorebtn"><img src="assets/icons/refresh-button.svg" width="20px" alt="">Reset</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;<button id="downloadbtn" class="btn btn-success float-right">Download</button>
             </div>
-            <button id="restorebtn">
-                Restore
-            </button>
+        </nav>
+        <div class="row" style="margin-right:0;height:calc(100% - 62px)">
+            <div class="col-9" style="height:100%;">
+                <canvas id="canvas"></canvas>
+                <div class="row align-items-center">
+                    <div class="col">
+                        
+                    </div>
+                    
+                </div>
+                <img src="assets/1.png" id="img" style="display:none;" />
+                
+
+
+                <!-- <a href="#" id="downloadlink">download</a> -->
+
+                <br/>
+               
+                
+            </div>
+            <div class="col-3 sidebar ">
+
+                <div class="p-3" style="color:#455257;font-size:18px">Basic</div>
+
+                <button id="invertbtn">Invert</button>
+                <button id="grayscalebtn">Grayscale</button>
+                <button id="brightenbtn" data-value="10">Brighten</button>
+                <button id="transparentbtn" data-value="30">Transparent</button>
+                <button id="darkenbtn" data-value="5">Darken</button>
+                <button id="solarisebtn" data-value="20">Solarise</button>
+                <button id="greenrybtn" data-value="10">Greenry</button>
+                <button id="nightlybtn" data-value="5">Nightly</button>
+
+                
+                <div class="p-3" style="color:#455257;font-size:18px">Replace Color</div>
+
+                <div class="customForm">
+                    <div class="row">
+                        <div class="col-3">From</div>
+                        <div class="col-9"><input type="text" id="before" placeholder="Eg :- 255,122,0 " /></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">To</div>
+                        <div class="col-9"><input type="text" id="after" placeholder="Eg :- 0,0,0 " /></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3"></div>
+                        <div class="col-9"><button id="colorSwitchbtn">Switch Colors</button></div>
+                    </div>
+                    
+                </div>
+                
+            </div>
         </div>
-        <br/>
-        <input type="file" id="load_file"/>
-        &nbsp;
-        <button id="downloadbtn">
-            Download
-        </button>
+
+       
         <script src="js/filter.js"></script>
     </body>
 </html>
