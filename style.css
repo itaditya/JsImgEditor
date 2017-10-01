@@ -1,0 +1,74 @@
+html,body{
+  margin: 0;
+  padding: 0;
+  background-color: #dde6e9;
+  height: 100%;
+}
+.navbar-light{
+  background-color: #fff !important;
+  border-bottom: solid 1px #ededed !important;
+}
+.sidebar{
+  width: 300px;
+  background-color: #fbfbfb;
+  position: fixed;
+  right: 0;
+  height: 100%;
+  overflow-y: scroll;
+  box-shadow: -3px 0px 8px #cad9de;
+  padding: 0;
+}
+  .sidebar button{
+    display: block;
+    padding: 10px 20px;
+    border: none;
+    width: 100%;
+    outline: none;
+    text-align: left;
+    background-color: #f9f9f9;
+    border-bottom: solid 1px #e4ebf1;
+    font-size: 14px;
+    color: rgba(0,0,0,0.5);
+    transition: all 0.2s ease;
+  }
+    .sidebar button:active{
+      background-color: #47beff;
+      color: #fff;
+    }
+    .sidebar #colorSwitchbtn{
+      background-color: #47beff;
+      color: #fff;
+      text-align: center;
+      border-radius: 3px;
+      margin-top: 2px;
+    }
+#canvas{
+  box-shadow: 0 0 15px 7px rgba(0, 0, 0, 0.15);
+  position:absolute;
+  top:50%;
+  left:50%;
+  max-height: 100%;
+  max-width: 100%;
+  transform:translate(-50%,-50%);
+}
+
+.btn-success{
+  background-color: #1fd5ad;
+  border: solid 1px #1fd5ad;
+  border-radius: 2px;
+}
+  .btn-success:hover{
+    background-color: #1CCAA1;
+    border: solid 1px #1CCAA1;
+  }
+
+.customForm{
+  background-color: #e4ebf1;
+  padding: 10px 20px;
+}
+  .customForm input{
+    border: none;
+    border-radius: 3px;
+    margin: 2px 0;
+    padding: 5px 10px;
+  }
