@@ -66,9 +66,29 @@ html,body{
   background-color: #e4ebf1;
   padding: 10px 20px;
 }
-  .customForm input{
-    border: none;
-    border-radius: 3px;
-    margin: 2px 0;
-    padding: 5px 10px;
-  }
+
+.customForm input{
+  border: none;
+  border-radius: 3px;
+  margin: 2px 0;
+  padding: 5px 10px;
+}
+
+.nav-link input[type="file"] {
+  display: none;
+}
+
+.btn-file-upload {
+  display: inline-block;
+  cursor: pointer;
+  background-color: #47beff;
+  color: #fff;
+  text-align: center;
+  border-radius: 3px;
+  margin-bottom: 0;
+}
+
+.btn-file-upload:hover{
+  background-color: #3CABE7;
+  border: solid 1px #3CABE7;
+}
