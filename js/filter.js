@@ -156,7 +156,7 @@ function draw(img) {
         ctx.putImageData(imageData, 0, 0);
     };
     var editBtns = document.querySelector(".editBtns");
-    editBtns.addEventListener("click", function() {
+    editBtns.addEventListener("click", function(event) {
         var id = event.target.id;
         var elem = event.target;
         console.log(id);
